@@ -1,5 +1,8 @@
-import 'package:dart_sample_game/dart_sample_game.dart' as dart_sample_game;
+import 'package:dart_sample_game/Game.dart';
+import 'package:dart_sample_game/Player.dart';
 
-main(List<String> arguments) {
-  print('Hello world: "${dart_sample_game.appName()}"!');
+void main(List<String> arguments) {
+  print("Hello world!");
+  print("${new Game()}");
+  print("${new Player()}");
 }
