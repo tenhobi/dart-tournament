@@ -1,2 +1,3 @@
-# dart-test-game
-My first test game in Dart
+# Dart sample game
+
+A sample command-line game application.
