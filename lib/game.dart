@@ -1,4 +1,3 @@
 library game;
 
-part 'src/Game.dart';
-part 'src/Player.dart';
+export 'game/game.dart';
