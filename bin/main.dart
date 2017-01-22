@@ -1,5 +1,4 @@
-import 'package:dart_sample_game/Game.dart';
-import 'package:dart_sample_game/Player.dart';
+import 'package:dart_sample_game/game.dart';
 
 void main(List<String> arguments) {
   print("Hello world!");

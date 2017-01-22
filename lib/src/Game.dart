@@ -1,3 +1,5 @@
+part of game;
+
 class Game {
   Game () {
     print("game constructor");
