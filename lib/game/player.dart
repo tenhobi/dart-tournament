@@ -1,10 +1,20 @@
-class Player {
-  int _hp = 0;
-  String _name;
+import 'dart:math';
 
-  Player (this._name, this._hp) {}
+class Player {
+  static int instanceCounter = 0;
+  int _hp;
+  int damage;
+  String _name;
+  int _id;
+
+  Player (this._name) {
+    print("in Player");
+    _hp = 100 + new Random().nextInt(10);
+    _id = instanceCounter++;
+    damage = 5 + new Random().nextInt(5);
+  }
 
   String toString () {
-    return "Player '${this._name}'";
+    return "Player#${_id} '${_name}' $_hp / $damage";
   }
 }
