@@ -1,5 +1,4 @@
 import 'dart:math';
-import 'dart:io';
 import 'dart:async';
 
 import 'player.dart';
@@ -67,7 +66,7 @@ class Tournament {
   }
 
   void _loop () {
-    if (_playerList.any((Player player) => (player.hp <= 0))) {
+    if (_playerList.where((Player player) => (player.hp > 0)).length <= 1) {
       print("The winner of the tournament is ${_playerList.firstWhere((Player player) => (player.hp > 0))}");
       print(generateScoreBoard(compare: (a, b) => b.hp.compareTo(a.hp)));
       status = TournamentStatus.ENDED;
@@ -75,9 +74,24 @@ class Tournament {
     }
 
     print("--- Round ${round++}");
-    _playerList.forEach((Player player) =>
-    player.hp -= new Random().nextInt(10));
-    new Future.delayed(const Duration(milliseconds: 500), _loop);
+
+    List<Player> playerList = new List();
+    playerList.addAll(_playerList.where((Player player) => player.hp > 0));
+    print("--- with ${playerList.length} players");
+
+    for (Player player in _playerList.where((Player player) => player.hp > 0)) {
+
+      do {
+        playerList.shuffle();
+      } while (player != playerList.first);
+
+      player.attack(playerList.first);
+      playerList.removeWhere((Player player) => player.hp <= 0);
+
+      print("$player is attacking ${playerList.first}");
+    }
+
+    new Future.delayed(const Duration(seconds: 1), _loop);
   }
 
   String toString () {
