@@ -21,8 +21,9 @@ class Player {
   bool operator == (p) => this.id == p.id;
 
   void defend (int damage) {
-    // Blocked
+    // Blocked attack.
     if (new Random().nextInt(30) == 0) {
+      print("Attack blocked.");
       return;
     }
 
