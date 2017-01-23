@@ -2,19 +2,20 @@ import 'dart:math';
 
 class Player {
   static int instanceCounter = 0;
-  int _hp;
+  int hp;
   int damage;
-  String _name;
-  int _id;
+  String name;
+  int id;
 
-  Player (this._name) {
-    print("in Player");
-    _hp = 100 + new Random().nextInt(10);
-    _id = instanceCounter++;
+  Player (this.name) {
+    hp = 100 + new Random().nextInt(10);
+    id = instanceCounter++;
     damage = 5 + new Random().nextInt(5);
   }
 
   String toString () {
-    return "Player#${_id} '${_name}' $_hp / $damage";
+    return "$runtimeType #$id - '$name' - hp: $hp, damage: $damage";
   }
+
+  bool operator == (p) => this.id == p.id;
 }

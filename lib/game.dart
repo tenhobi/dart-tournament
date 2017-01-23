@@ -1,3 +1,3 @@
 library game;
 
-export 'game/game.dart';
+export 'game/tournament.dart';
