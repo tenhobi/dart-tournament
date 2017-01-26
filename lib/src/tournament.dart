@@ -23,7 +23,7 @@ class Tournament {
     for (int i = 0; i < playerCount; i++) {
       Player player;
 
-      switch (new Random().nextInt(5)) {
+      switch (new Random().nextInt(4)) {
         case 0:
           player = new Magician(ng.generate());
           break;
@@ -60,35 +60,45 @@ class Tournament {
 
       default:
         print(generateScoreBoard(heading: "Tournament is starting with players"));
+        status = TournamentStatus.INPROGRESS;
 
         _loop();
     }
   }
 
   void _loop () {
-    if (_playerList.where((Player player) => (player.hp > 0)).length <= 1) {
-      print("The winner of the tournament is ${_playerList.firstWhere((Player player) => (player.hp > 0))}");
-      print(generateScoreBoard(compare: (a, b) => b.hp.compareTo(a.hp)));
+    if (_playerList
+      .where((Player player) => (player.hp > 0))
+      .length <= 1) {
       status = TournamentStatus.ENDED;
+
+      print("""
+
+==============
+
+The winner of the tournament is ${_playerList.firstWhere((Player player) => (player.hp > 0))}
+""");
+
+      print(generateScoreBoard(compare: (a, b) => b.hp.compareTo(a.hp)));
       return;
     }
 
-    print("--- Round ${round++}");
-
     List<Player> playerList = new List();
     playerList.addAll(_playerList.where((Player player) => player.hp > 0));
-    print("--- with ${playerList.length} players");
+
+    print("""
+
+  --- Round ${round++}
+  --- with ${playerList.length} players
+""");
 
     for (Player player in _playerList.where((Player player) => player.hp > 0)) {
-
       do {
         playerList.shuffle();
-      } while (player != playerList.first);
+      } while (player == playerList.first);
 
       player.attack(playerList.first);
       playerList.removeWhere((Player player) => player.hp <= 0);
-
-      print("$player is attacking ${playerList.first}");
     }
 
     new Future.delayed(const Duration(seconds: 1), _loop);
@@ -99,14 +109,14 @@ class Tournament {
   }
 
   String generateScoreBoard ({int compare (Player a, Player b), String heading: "Score board"}) {
-    String stat = "\n$heading:\n";
+    String stat = "$heading:\n";
 
     if (compare != null) {
       _playerList.sort(compare);
     }
 
     for (Player player in _playerList) {
-      stat += player.toString() + "\n";
+      stat += "${player.generateStats()}${_playerList.last != player ? "\n" : ""}";
     }
 
     return stat;

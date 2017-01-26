@@ -7,7 +7,16 @@ final List<String> _firstNames = [
   "Emmet",
   "Ivan",
   "Edward",
-  "Honzík"
+  "Honzík",
+  "David",
+  "Daenerys",
+  "John",
+  "Ellaria",
+  "Cercei",
+  "Oberyn",
+  "Ramsay",
+  "Roose",
+  "Samwell"
 ];
 
 final List<String> _lastNames = [
@@ -17,7 +26,18 @@ final List<String> _lastNames = [
   "Woodman",
   "Fireman",
   "Skywalker",
-  "the Speedster"
+  "the Speedster",
+  "the Kingslayer",
+  "Targaryen",
+  "Sand",
+  "Snow",
+  "Flowers",
+  "Hill",
+  "Pyke",
+  "Rivers",
+  "Stone",
+  "Storm",
+  "Waters"
 ];
 
 class NameGenerator {
