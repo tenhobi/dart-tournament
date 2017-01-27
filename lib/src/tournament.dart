@@ -14,7 +14,7 @@ enum TournamentStatus {
 
 class Tournament {
   List<Player> _playerList = [];
-  int round = 0;
+  int round = 1;
   TournamentStatus status;
 
   Tournament ([int playerCount = 30]) {
