@@ -17,7 +17,7 @@ class Tournament {
   int round = 0;
   TournamentStatus status;
 
-  Tournament ([int playerCount = 5]) {
+  Tournament ([int playerCount = 30]) {
     NameGenerator ng = new NameGenerator();
 
     for (int i = 0; i < playerCount; i++) {
@@ -67,22 +67,29 @@ class Tournament {
   }
 
   void _loop () {
-    if (_playerList
+    int alivePlayers = _playerList
       .where((Player player) => (player.hp > 0))
-      .length <= 1) {
+      .length;
+
+    if (alivePlayers <= 1) {
       status = TournamentStatus.ENDED;
 
       print("""
 
 ==============
-
-The winner of the tournament is ${_playerList.firstWhere((Player player) => (player.hp > 0))}
 """);
+
+      if (alivePlayers == 1) {
+        print("The winner of the tournament is ${_playerList.firstWhere((Player player) => (player.hp > 0))}\n");
+      } else {
+        print("No one survived, no one won.\n");
+      }
 
       print(generateScoreBoard(compare: (a, b) => b.hp.compareTo(a.hp)));
       return;
     }
 
+    // Keeps track of people who was alive at the start of the round.
     List<Player> playerList = new List();
     playerList.addAll(_playerList.where((Player player) => player.hp > 0));
 
@@ -92,13 +99,14 @@ The winner of the tournament is ${_playerList.firstWhere((Player player) => (pla
   --- with ${playerList.length} players
 """);
 
-    for (Player player in _playerList.where((Player player) => player.hp > 0)) {
-      do {
-        playerList.shuffle();
-      } while (player == playerList.first);
+    for (Player player in playerList) {
+      Player target;
 
-      player.attack(playerList.first);
-      playerList.removeWhere((Player player) => player.hp <= 0);
+      do {
+        target = playerList.elementAt(new Random().nextInt(playerList.length));
+      } while (player == target);
+
+      player.attack(target);
     }
 
     new Future.delayed(const Duration(seconds: 1), _loop);
