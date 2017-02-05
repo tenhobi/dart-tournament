@@ -17,7 +17,7 @@ class Tournament {
   int round = 1;
   TournamentStatus status;
 
-  Tournament ([int playerCount = 30]) {
+  Tournament ([int playerCount = 5]) {
     NameGenerator ng = new NameGenerator();
 
     for (int i = 0; i < playerCount; i++) {
@@ -67,11 +67,11 @@ class Tournament {
   }
 
   void _loop () {
-    int alivePlayers = _playerList
-      .where((Player player) => (player.hp > 0))
-      .length;
+    // Keeps track of people who was alive at the start of the round.
+    List<Player> playerList = new List()
+      ..addAll(_playerList.where((Player player) => (player.hp > 0)));
 
-    if (alivePlayers <= 1) {
+    if (playerList.length <= 1) {
       status = TournamentStatus.ENDED;
 
       print("""
@@ -79,7 +79,7 @@ class Tournament {
 ==============
 """);
 
-      if (alivePlayers == 1) {
+      if (playerList.length == 1) {
         print("The winner of the tournament is ${_playerList.firstWhere((Player player) => (player.hp > 0))}\n");
       } else {
         print("No one survived, no one won.\n");
@@ -88,10 +88,6 @@ class Tournament {
       print(generateScoreBoard(compare: (a, b) => b.hp.compareTo(a.hp)));
       return;
     }
-
-    // Keeps track of people who was alive at the start of the round.
-    List<Player> playerList = new List();
-    playerList.addAll(_playerList.where((Player player) => player.hp > 0));
 
     print("""
 
