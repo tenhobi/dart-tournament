@@ -43,19 +43,18 @@ class Tournament {
         break;
 
       default:
-        status = TournamentStatus.INPROGRESS;
         _init(playerCount);
-        print(generateScoreBoard(heading: "Tournament is starting with $playerCount players"));
         _loop();
     }
   }
 
   /// Initialize a tournament.
   void _init (int playerCount) {
+    status = TournamentStatus.INPROGRESS;
     _round = 1;
     _playerList = [];
     tournamentCounter++;
-
+    
     Name name = new Name();
 
     // Create an instance for each player in tournament.
@@ -81,6 +80,8 @@ class Tournament {
 
       _playerList.add(player);
     }
+
+    print(generateScoreBoard(heading: "Tournament is starting with $playerCount players"));
   }
 
   /// Tournament's main game loop.
