@@ -1,5 +1,6 @@
 import 'dart:math';
 
+/// Database of first names.
 final List<String> _firstNames = [
   "Issac",
   "Vome",
@@ -19,6 +20,7 @@ final List<String> _firstNames = [
   "Samwell"
 ];
 
+/// Database of last names.
 final List<String> _lastNames = [
   "the Rock",
   "the Slayer",
@@ -40,17 +42,21 @@ final List<String> _lastNames = [
   "Waters"
 ];
 
-class NameGenerator {
+/// Creates a random name generator.
+class Name {
 
+  /// Generate random name containing first name and last name.
   String generate () {
-    return "${_randomFirst()} ${_randomLast()}";
+    return "${generateFirst()} ${generateLast()}";
   }
 
-  String _randomFirst () {
+  /// Generate random first name.
+  String generateFirst () {
     return _firstNames[new Random().nextInt(_firstNames.length)];
   }
 
-  String _randomLast () {
+  /// Generate random last name.
+  String generateLast () {
     return _lastNames[new Random().nextInt(_lastNames.length)];
   }
 }

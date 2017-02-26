@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'player.dart';
 
+/// Warrior player with lower damage, but higher hp.
 class Warriror extends Player {
 
   Warriror (String name) : super(name) {

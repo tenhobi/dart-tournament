@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'player.dart';
 
+/// Magician player with higher damage, but lower hp.
 class Magician extends Player {
 
   Magician (String name) : super(name) {

@@ -1,11 +1,13 @@
 import 'dart:math';
 import 'dart:async';
 
-import 'player.dart';
-import 'magician.dart';
-import 'warrior.dart';
+import 'player/player.dart';
+import 'player/magician.dart';
+import 'player/warrior.dart';
+import 'player/peasant.dart';
 import 'name.dart';
 
+/// Status of tournament.
 enum TournamentStatus {
   EMPTY,
   INPROGRESS,
@@ -13,38 +15,24 @@ enum TournamentStatus {
 }
 
 class Tournament {
-  List<Player> _playerList = [];
-  int round = 1;
+
+  /// List of players of the current tournament.
+  List<Player> _playerList;
+
+  /// Current round of the current tournament.
+  int _round;
+
+  /// Status of the current tournament.
   TournamentStatus status;
 
-  Tournament ([int playerCount = 5]) {
-    NameGenerator ng = new NameGenerator();
+  static int tournamentCounter = 0;
 
-    for (int i = 0; i < playerCount; i++) {
-      Player player;
-
-      switch (new Random().nextInt(4)) {
-        case 0:
-          player = new Magician(ng.generate());
-          break;
-
-        case 1:
-          player = new Warriror(ng.generate());
-          break;
-
-        default:
-          player = new Player(ng.generate());
-      }
-
-      _playerList.add(player);
-    }
-
-    if (_playerList.isEmpty) {
+  /// Attempt to start a tournament.
+  void start ([int playerCount = 7]) {
+    if (playerCount <= 0) {
       status = TournamentStatus.EMPTY;
     }
-  }
 
-  void start () {
     switch (status) {
       case TournamentStatus.EMPTY:
         print("Tournament is empty.");
@@ -54,18 +42,48 @@ class Tournament {
         print("Tournament is running.");
         break;
 
-      case TournamentStatus.ENDED:
-        print("Tournament has already ended.");
-        break;
-
       default:
-        print(generateScoreBoard(heading: "Tournament is starting with players"));
         status = TournamentStatus.INPROGRESS;
-
+        _init(playerCount);
+        print(generateScoreBoard(heading: "Tournament is starting with $playerCount players"));
         _loop();
     }
   }
 
+  /// Initialize a tournament.
+  void _init (int playerCount) {
+    _round = 1;
+    _playerList = [];
+    tournamentCounter++;
+
+    Name name = new Name();
+
+    // Create an instance for each player in tournament.
+    for (int i = 0; i < playerCount; i++) {
+      Player player;
+
+      switch (new Random().nextInt(6)) {
+        case 0:
+          player = new Magician(name.generate());
+          break;
+
+        case 1:
+          player = new Warriror(name.generate());
+          break;
+
+        case 2:
+          player = new Peasant(name.generate());
+          break;
+
+        default:
+          player = new Player(name.generate());
+      }
+
+      _playerList.add(player);
+    }
+  }
+
+  /// Tournament's main game loop.
   void _loop () {
     // Keeps track of people who was alive at the start of the round.
     List<Player> playerList = new List()
@@ -86,14 +104,20 @@ class Tournament {
       }
 
       print(generateScoreBoard(compare: (a, b) => b.hp.compareTo(a.hp)));
+
+      // Clear the player list.
+      _playerList = [];
+
       return;
     }
 
     print("""
 
-  --- Round ${round++}
+  --- Round $_round
   --- with ${playerList.length} players
 """);
+
+    _round++;
 
     for (Player player in playerList) {
       Player target;
@@ -120,7 +144,7 @@ class Tournament {
     }
 
     for (Player player in _playerList) {
-      stat += "${player.generateStats()}${_playerList.last != player ? "\n" : ""}";
+      stat += player.generateStats() + (_playerList.last != player ? "\n" : "");
     }
 
     return stat;
