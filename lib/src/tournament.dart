@@ -52,9 +52,9 @@ class Tournament {
   void _init (int playerCount) {
     status = TournamentStatus.INPROGRESS;
     _round = 1;
-    _playerList = [];
+    _playerList = <Player>[];
     tournamentCounter++;
-    
+
     Name name = new Name();
 
     // Create an instance for each player in tournament.
@@ -87,7 +87,7 @@ class Tournament {
   /// Tournament's main game loop.
   void _loop () {
     // Keeps track of people who was alive at the start of the round.
-    List<Player> playerList = new List()
+    List<Player> playerList = <Player>[]
       ..addAll(_playerList.where((Player player) => (player.hp > 0)));
 
     if (playerList.length <= 1) {
@@ -104,10 +104,10 @@ class Tournament {
         print("No one survived, no one won.\n");
       }
 
-      print(generateScoreBoard(compare: (a, b) => b.hp.compareTo(a.hp)));
+      print(generateScoreBoard(compare: (Player a, Player b) => b.hp.compareTo(a.hp)));
 
       // Clear the player list.
-      _playerList = [];
+      _playerList = <Player>[];
 
       return;
     }
@@ -130,11 +130,11 @@ class Tournament {
       player.attack(target);
     }
 
-    new Future.delayed(const Duration(seconds: 1), _loop);
+    new Future<dynamic>.delayed(const Duration(seconds: 1), _loop);
   }
 
   String toString () {
-    return generateScoreBoard(compare: (a, b) => b.hp.compareTo(a.hp));
+    return generateScoreBoard(compare: (Player a, Player b) => b.hp.compareTo(a.hp));
   }
 
   String generateScoreBoard ({int compare (Player a, Player b), String heading: "Score board"}) {

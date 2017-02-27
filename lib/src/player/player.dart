@@ -40,7 +40,7 @@ class Player {
   }
 
   /// Compare 2 player based on theirs' IDs.
-  bool operator == (p) => this.id == p?.id;
+  bool operator == (Object p) => p is Player && this.id == p?.id;
 
   /// Automatic defend of the player.
   void defend (int damage) {

@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'player.dart';
 
 /// Peasant player with lower damage and lower hp. Represents really unskilled player.

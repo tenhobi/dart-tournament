@@ -1,7 +1,7 @@
 import 'dart:math';
 
 /// Database of first names.
-final List<String> _firstNames = [
+final List<String> _firstNames = <String>[
   "Issac",
   "Vome",
   "Aladin",
@@ -21,7 +21,7 @@ final List<String> _firstNames = [
 ];
 
 /// Database of last names.
-final List<String> _lastNames = [
+final List<String> _lastNames = <String>[
   "the Rock",
   "the Slayer",
   "the Magician",
