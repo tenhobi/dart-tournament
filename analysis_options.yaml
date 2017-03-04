@@ -34,4 +34,3 @@ linter:
     - super_goes_last
     - unnecessary_brace_in_string_interp
     - unnecessary_getters_setters
-
