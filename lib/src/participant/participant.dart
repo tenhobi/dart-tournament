@@ -1,26 +1,27 @@
 import 'dart:math';
 
-class Player {
+/// Sets general behavior and attributes for [Participant] extended classes.
+abstract class Participant {
 
-  /// Keeps track of number of added instances.
+  /// Keeps track of number of added instances of [Participant].
   static int instanceCounter = 0;
 
-  /// Health points of this player.
+  /// Health points of this [Participant].
   int hp;
 
-  /// Damage points of this player.
+  /// Damage points of this [Participant].
   int damage;
 
-  /// A name of this player.
+  /// A name of this [Participant].
   String name;
 
-  /// An identification of this player.
+  /// An identification of this [Participant].
   int id;
 
   /// Original (starting) amount of health points.
   int originalHp;
 
-  Player (this.name) {
+  Participant (this.name) {
     // Set health points to 100 up to 110.
     originalHp = hp = 100 + new Random().nextInt(10 + 1);
 
@@ -34,15 +35,15 @@ class Player {
     return "$name ($runtimeType #$id) [$hp/$originalHp]";
   }
 
-  /// Generate player line for static table.
+  /// Generate information about this [Participant].
   String generateStats () {
     return "$runtimeType #$id - '$name' - hp: $hp/$originalHp, damage: $damage";
   }
 
-  /// Compare 2 player based on theirs' IDs.
-  bool operator == (Object p) => p is Player && this.id == p?.id;
+  /// Compare this and another [Participant] based on theirs' [id]s.
+  bool operator == (Object p) => p is Participant && this.id == p?.id;
 
-  /// Automatic defend of the player.
+  /// Automatic defend of this [Participant].
   void defend (int damage) {
     // Chance to block attack 1/30.
     if (new Random().nextInt(30) == 0) {
@@ -53,8 +54,8 @@ class Player {
     hp -= damage;
   }
 
-  /// Attack to another player.
-  void attack (Player player) {
+  /// Attack to another [Participant].
+  void attack (Participant player) {
     int power = damage + ((new Random().nextInt(15) == 0) ? damage ~/ 2 : 0);
 
     print("$this is attacking $player with power of $power!");

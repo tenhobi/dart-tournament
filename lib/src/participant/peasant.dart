@@ -1,7 +1,7 @@
-import 'player.dart';
+import 'participant.dart';
 
-/// Peasant player with lower damage and lower hp. Represents really unskilled player.
-class Peasant extends Player {
+/// Type of [Participant] that has lower [damage] and lower [hp]. Represents really unskilled [Participant].
+class Peasant extends Participant {
 
   Peasant (String name) : super(name) {
     // Set the damage to 0.5 times the default value.

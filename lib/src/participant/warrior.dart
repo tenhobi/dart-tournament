@@ -1,9 +1,9 @@
 import 'dart:math';
 
-import 'player.dart';
+import 'participant.dart';
 
-/// Warrior player with lower [damage], but higher [hp].
-class Warriror extends Player {
+/// Type of [Participant] that has lower [damage], but higher [hp].
+class Warriror extends Participant {
 
   Warriror (String name) : super(name) {
     // Set the damage to 0.5 up to 0.8 times the default value.

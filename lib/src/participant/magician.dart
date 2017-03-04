@@ -1,9 +1,9 @@
 import 'dart:math';
 
-import 'player.dart';
+import 'participant.dart';
 
-/// Magician player with higher damage, but lower hp.
-class Magician extends Player {
+/// Type of [Participant] that has higher [damage], but lower [hp].
+class Magician extends Participant {
 
   Magician (String name) : super(name) {
     // 3.0 to 4.0 times default damage
