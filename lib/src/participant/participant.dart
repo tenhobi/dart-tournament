@@ -1,4 +1,5 @@
 import 'dart:math';
+import 'dart:io';
 
 /// Sets general behavior and attributes for [Participant] extended classes.
 abstract class Participant {
@@ -16,19 +17,17 @@ abstract class Participant {
   String name;
 
   /// An identification of this [Participant].
-  int id;
+  final int id;
 
   /// Original (starting) amount of health points.
   int originalHp;
 
-  Participant (this.name) {
-    // Set health points to 100 up to 110.
-    originalHp = hp = 100 + new Random().nextInt(10 + 1);
-
+  Participant (this.name) : id = instanceCounter++ {
     // Set damage to 5 up to 10.
     damage = 5 + new Random().nextInt(5 + 1);
 
-    id = instanceCounter++;
+    // Set health points to 100 up to 110.
+    originalHp = hp = 100 + new Random().nextInt(10 + 1);
   }
 
   String toString () {
@@ -41,13 +40,13 @@ abstract class Participant {
   }
 
   /// Compare this and another [Participant] based on theirs' [id]s.
-  bool operator == (Object p) => p is Participant && this.id == p?.id;
+  bool operator == (final Object p) => p is Participant && this.id == p.id;
 
   /// Automatic defend of this [Participant].
-  void defend (int damage) {
+  void defend (final int damage) {
     // Chance to block attack 1/30.
     if (new Random().nextInt(30) == 0) {
-      print("... Attack blocked.");
+      stdout.writeln("... Attack blocked.");
       return;
     }
 
@@ -55,10 +54,10 @@ abstract class Participant {
   }
 
   /// Attack to another [Participant].
-  void attack (Participant player) {
+  void attack (final Participant player) {
     int power = damage + ((new Random().nextInt(15) == 0) ? damage ~/ 2 : 0);
 
-    print("$this is attacking $player with power of $power!");
+    stdout.writeln("$this is attacking $player with power of $power!");
 
     player.defend(power);
   }

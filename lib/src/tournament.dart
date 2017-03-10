@@ -1,5 +1,6 @@
 import 'dart:math';
 import 'dart:async';
+import 'dart:io';
 
 import 'participant/participant.dart';
 import 'participant/magician.dart';
@@ -28,18 +29,18 @@ class Tournament {
   static int tournamentCounter = 0;
 
   /// Attempt to start a tournament.
-  void start ([int playerCount = 7]) {
+  void start ([final int playerCount = 7]) {
     if (playerCount <= 0) {
       status = TournamentStatus.EMPTY;
     }
 
     switch (status) {
       case TournamentStatus.EMPTY:
-        print("Tournament is empty.");
+        stdout.writeln("Tournament is empty.");
         break;
 
       case TournamentStatus.INPROGRESS:
-        print("Tournament is running.");
+        stdout.writeln("Tournament is running.");
         break;
 
       default:
@@ -49,13 +50,11 @@ class Tournament {
   }
 
   /// Initialize a tournament.
-  void _init (int playerCount) {
+  void _init (final int playerCount) {
     status = TournamentStatus.INPROGRESS;
     _round = 1;
     _playerList = <Participant>[];
     tournamentCounter++;
-
-    Name name = new Name();
 
     // Create an instance for each participant in tournament.
     for (int i = 0; i < playerCount; i++) {
@@ -63,21 +62,21 @@ class Tournament {
 
       switch (new Random().nextInt(6)) {
         case 0:
-          player = new Magician(name.generate());
+          player = new Magician(Name.generate());
           break;
 
         case 1:
-          player = new Warriror(name.generate());
+          player = new Warriror(Name.generate());
           break;
 
         default:
-          player = new Peasant(name.generate());
+          player = new Peasant(Name.generate());
       }
 
       _playerList.add(player);
     }
 
-    print(generateScoreBoard(heading: "Tournament is starting with $playerCount players"));
+    stdout.write(generateScoreBoard(heading: "Tournament is starting with $playerCount players"));
   }
 
   /// Tournament's main game loop.
@@ -89,18 +88,19 @@ class Tournament {
     if (playerList.length <= 1) {
       status = TournamentStatus.ENDED;
 
-      print("""
+      stdout.write("""
 
 ==============
+
 """);
 
       if (playerList.length == 1) {
-        print("The winner of the tournament is ${_playerList.firstWhere((Participant player) => (player.hp > 0))}\n");
+        stdout.writeln("The winner of the tournament is ${_playerList.firstWhere((Participant player) => (player.hp > 0))}\n");
       } else {
-        print("No one survived, no one won.\n");
+        stdout.writeln("No one survived, no one won.\n");
       }
 
-      print(generateScoreBoard(compare: (Participant a, Participant b) => b.hp.compareTo(a.hp)));
+      stdout.write(generateScoreBoard(compare: (Participant a, Participant b) => b.hp.compareTo(a.hp)));
 
       // Clear the participant list.
       _playerList = <Participant>[];
@@ -108,10 +108,11 @@ class Tournament {
       return;
     }
 
-    print("""
+    stdout.write("""
 
   --- Round $_round
   --- with ${playerList.length} players
+
 """);
 
     _round++;
@@ -133,17 +134,19 @@ class Tournament {
     return generateScoreBoard(compare: (Participant a, Participant b) => b.hp.compareTo(a.hp));
   }
 
-  String generateScoreBoard ({int compare (Participant a, Participant b), String heading: "Score board"}) {
+  String generateScoreBoard ({int compare (Participant a, Participant b), final String heading = "Score board"}) {
     String stat = "$heading:\n";
 
     if (compare != null) {
       _playerList.sort(compare);
     }
 
+    StringBuffer sb = new StringBuffer(stat);
+
     for (Participant player in _playerList) {
-      stat += player.generateStats() + (_playerList.last != player ? "\n" : "");
+      sb.writeln(player.generateStats());
     }
 
-    return stat;
+    return sb.toString();
   }
 }
