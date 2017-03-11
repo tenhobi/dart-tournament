@@ -29,7 +29,7 @@ class Tournament {
   static int tournamentCounter = 0;
 
   /// Attempt to start a tournament.
-  void start ([final int playerCount = 7]) {
+  void start ([final int playerCount = 4]) {
     if (playerCount <= 0) {
       status = TournamentStatus.EMPTY;
     }
@@ -75,6 +75,8 @@ class Tournament {
 
       _playerList.add(player);
     }
+
+    _playerList.add(new Warriror("Hercules"));
 
     stdout.write(generateScoreBoard(heading: "Tournament is starting with $playerCount players"));
   }

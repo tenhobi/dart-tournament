@@ -27,7 +27,7 @@ abstract class Participant {
   static const int defaultHp = 100;
   static const double defaultHpRatio = 1.0;
 
-  Participant ({this.name, double hpRatio = defaultHpRatio}) : originalHp = (hpRatio * defaultHp).toInt(), id = instanceCounter++ {
+  Participant ({this.name, double hpRatio = defaultHpRatio}) : originalHp = (hpRatio * defaultHp).toInt(), id = ++instanceCounter {
     // Set damage to 5 up to 10.
     damage = 5 + new Random().nextInt(5 + 1);
 
