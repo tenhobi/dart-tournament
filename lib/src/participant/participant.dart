@@ -1,6 +1,8 @@
 import 'dart:math';
 import 'dart:io';
 
+import '../name.dart';
+
 /// Sets general behavior and attributes for [Participant] extended classes.
 abstract class Participant {
 
@@ -20,14 +22,19 @@ abstract class Participant {
   final int id;
 
   /// Original (starting) amount of health points.
-  int originalHp;
+  final int originalHp;
 
-  Participant (this.name) : id = instanceCounter++ {
+  static const int defaultHp = 100;
+  static const double defaultHpRatio = 1.0;
+
+  Participant ({this.name, double hpRatio = defaultHpRatio}) : originalHp = (hpRatio * defaultHp).toInt(), id = instanceCounter++ {
     // Set damage to 5 up to 10.
     damage = 5 + new Random().nextInt(5 + 1);
 
-    // Set health points to 100 up to 110.
-    originalHp = hp = 100 + new Random().nextInt(10 + 1);
+    // Set the max health points of this participant.
+    hp = originalHp;
+
+    name ??= Name.generate();
   }
 
   String toString () {

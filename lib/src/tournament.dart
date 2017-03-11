@@ -60,17 +60,17 @@ class Tournament {
     for (int i = 0; i < playerCount; i++) {
       Participant player;
 
-      switch (new Random().nextInt(6)) {
+      switch (new Random().nextInt(5)) {
         case 0:
-          player = new Magician(Name.generate());
+          player = new Magician();
           break;
 
         case 1:
-          player = new Warriror(Name.generate());
+          player = new Warriror();
           break;
 
         default:
-          player = new Peasant(Name.generate());
+          player = new Peasant();
       }
 
       _playerList.add(player);
