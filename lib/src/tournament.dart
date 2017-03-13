@@ -6,7 +6,6 @@ import 'participant/participant.dart';
 import 'participant/magician.dart';
 import 'participant/warrior.dart';
 import 'participant/peasant.dart';
-import 'name.dart';
 
 /// Status of tournament.
 enum TournamentStatus {

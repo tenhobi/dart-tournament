@@ -1,12 +1,17 @@
 # Dart Tournament
 
-This is an experimental console game using Dart focusing autonomous processing of randomly generated simple game data. Also, this game can be used to demonstrate the Dart language.
+[![Build Status](https://travis-ci.org/HoBi/dart-tournament.svg?branch=master)](https://travis-ci.org/HoBi/dart-tournament)
+[![Coverage Status](https://coveralls.io/repos/github/HoBi/dart-tournament/badge.svg?branch=master)](https://coveralls.io/github/HoBi/dart-tournament?branch=master)
+
+An experimental console game using Dart focusing autonomous processing of randomly generated simple game data. Also, this game can be used to demonstrate the Dart language.
 
 ## How it works
 
 The tournament starts with `x` participiants, in this sample there are 3. Round by round the participiants randomly attacks to other tournament's participiants which defends themselves as the response. The participiants might be of various types, like a magician, warrior etc.
 
 The winner of the tournament is the last player with positive health points or nobody, if every living participiant dies in the last round. 
+
+## Example game output
 
 ```
 Tournament is starting with 3 players:
@@ -54,7 +59,7 @@ Samwell Flowers (Warriror #2) [93/183] is attacking Vome the Magician (Magician 
 
 Vome the Magician (Magician #1) [85/109] is attacking Samwell Flowers (Warriror #2) [93/183] with power of 42!
 Samwell Flowers (Warriror #2) [51/183] is attacking Vome the Magician (Magician #1) [85/109] with power of 6!
-
+[](LICENSE)
   --- Round 7
   --- with 2 players
 
@@ -83,3 +88,11 @@ Magician #1 - 'Vome the Magician' - hp: 58/109, damage: 28
 Warriror #2 - 'Samwell Flowers' - hp: -5/183, damage: 6
 Peasant #0 - 'Issac Woodman' - hp: -9/53, damage: 3
 ```
+
+## Contribute
+
+Spotted an error? Something doesn't make sense? [Open an issue](../../issues/new) or submit PRs.
+
+## License
+
+Licensed under the [MIT License](LICENSE).

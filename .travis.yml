@@ -1,0 +1,8 @@
+language: dart
+
+dart:
+  - stable
+  - dev
+
+script:
+  - 'dartanalyzer bin/ lib/ test/ --fatal-lints --fatal-warnings'
