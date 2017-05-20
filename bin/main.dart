@@ -1,4 +1,4 @@
-import 'package:dart_sample_game/game.dart';
+import 'package:dart_tournament/game.dart';
 
 void main (List<String> args) {
   new Tournament()
