@@ -27,7 +27,9 @@ abstract class Participant {
   static const int defaultHp = 100;
   static const double defaultHpRatio = 1.0;
 
-  Participant ({this.name, double hpRatio = defaultHpRatio}) : originalHp = (hpRatio * defaultHp).toInt(), id = ++instanceCounter {
+  Participant ({this.name, double hpRatio = defaultHpRatio})
+    : originalHp = (hpRatio * defaultHp).toInt(),
+      id = ++instanceCounter {
     // Set damage to 5 up to 10.
     damage = 5 + new Random().nextInt(5 + 1);
 
@@ -37,6 +39,7 @@ abstract class Participant {
     name ??= Name.generate();
   }
 
+  @override
   String toString () {
     return "$name ($runtimeType #$id) [$hp/$originalHp]";
   }
@@ -47,7 +50,17 @@ abstract class Participant {
   }
 
   /// Compare this and another [Participant] based on theirs' [id]s.
+  @override
   bool operator == (final Object p) => p is Participant && this.id == p.id;
+
+  /// Attack to another [Participant].
+  void attack (final Participant player) {
+    int power = damage + ((new Random().nextInt(15) == 0) ? damage ~/ 2 : 0);
+
+    stdout.writeln("$this is attacking $player with power of $power!");
+
+    player.defend(power);
+  }
 
   /// Automatic defend of this [Participant].
   void defend (final int damage) {
@@ -60,12 +73,6 @@ abstract class Participant {
     hp -= damage;
   }
 
-  /// Attack to another [Participant].
-  void attack (final Participant player) {
-    int power = damage + ((new Random().nextInt(15) == 0) ? damage ~/ 2 : 0);
-
-    stdout.writeln("$this is attacking $player with power of $power!");
-
-    player.defend(power);
-  }
+  /// Automatic
+  void rest () {}
 }

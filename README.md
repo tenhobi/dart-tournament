@@ -88,7 +88,7 @@ Warriror #2 - 'Samwell Flowers' - hp: -5/183, damage: 6
 Peasant #0 - 'Issac Woodman' - hp: -9/53, damage: 3
 ```
 
-## Contribute
+## Contributing
 
 Spotted an error? Something doesn't make sense? [Open an issue](../../issues/new) or submit PRs.
 

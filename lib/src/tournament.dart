@@ -118,6 +118,8 @@ class Tournament {
 
     _round++;
 
+    playerList.forEach((Participant p) => p.rest());
+
     for (Participant player in playerList) {
       Participant target;
 

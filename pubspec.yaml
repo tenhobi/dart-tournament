@@ -1,11 +1,11 @@
-name: dart_sample_game
+name: dart_tournament
 version: 0.0.1
 description: A sample command-line game application.
 author:
   - Honza Bittner <the@honzabittner.cz>
 
 environment:
-  sdk: '>=1.0.0 <2.0.0'
+  sdk: '>=1.22.0 <2.0.0'
 
 dependencies:
 
