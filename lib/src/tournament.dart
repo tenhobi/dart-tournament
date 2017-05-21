@@ -35,11 +35,11 @@ class Tournament {
 
     switch (status) {
       case TournamentStatus.EMPTY:
-        stdout.writeln("Tournament is empty.");
+        stdout.writeln('Tournament is empty.');
         break;
 
       case TournamentStatus.INPROGRESS:
-        stdout.writeln("Tournament is running.");
+        stdout.writeln('Tournament is running.');
         break;
 
       default:
@@ -75,9 +75,9 @@ class Tournament {
       _playerList.add(player);
     }
 
-    _playerList.add(new Warriror("Hercules"));
+    _playerList.add(new Warriror('Hercules'));
 
-    stdout.write(generateScoreBoard(heading: "Tournament is starting with $playerCount players"));
+    stdout.write(generateScoreBoard(heading: 'Tournament is starting with $playerCount players'));
   }
 
   /// Tournament's main game loop.
@@ -89,16 +89,16 @@ class Tournament {
     if (playerList.length <= 1) {
       status = TournamentStatus.ENDED;
 
-      stdout.write("""
+      stdout.write('''
 
 ==============
 
-""");
+''');
 
       if (playerList.length == 1) {
-        stdout.writeln("The winner of the tournament is ${_playerList.firstWhere((Participant player) => (player.hp > 0))}\n");
+        stdout.writeln('The winner of the tournament is ${_playerList.firstWhere((Participant player) => (player.hp > 0))}\n');
       } else {
-        stdout.writeln("No one survived, no one won.\n");
+        stdout.writeln('No one survived, no one won.\n');
       }
 
       stdout.write(generateScoreBoard(compare: (Participant a, Participant b) => b.hp.compareTo(a.hp)));
@@ -109,12 +109,12 @@ class Tournament {
       return;
     }
 
-    stdout.write("""
+    stdout.write('''
 
   --- Round $_round
   --- with ${playerList.length} players
 
-""");
+''');
 
     _round++;
 
@@ -137,8 +137,8 @@ class Tournament {
     return generateScoreBoard(compare: (Participant a, Participant b) => b.hp.compareTo(a.hp));
   }
 
-  String generateScoreBoard ({int compare (Participant a, Participant b), final String heading = "Score board"}) {
-    String stat = "$heading:\n";
+  String generateScoreBoard ({int compare (Participant a, Participant b), final String heading = 'Score board'}) {
+    String stat = '$heading:\n';
 
     if (compare != null) {
       _playerList.sort(compare);

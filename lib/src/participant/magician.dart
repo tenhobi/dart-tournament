@@ -6,7 +6,7 @@ import 'participant.dart';
 /// Type of [Participant] that can use magic.
 class Magician extends Participant {
 
-  int _mana;
+  int _mana = 30;
 
   Magician ([String name]) : super(name: name, hpRatio: 0.5 + (new Random().nextInt(5 + 1) / 10)) {
     // 3.0 to 4.0 times default damage
@@ -24,10 +24,10 @@ class Magician extends Participant {
     // 5 to 15 decrease of mana, 10 % chance to not attack with magic.
     if (((_mana -= (new Random().nextInt(10 + 1) + 5)) > 0) && (new Random().nextInt(10) != 0)) {
       player.defend(magicPower);
-      stdout.writeln("$this is attacking $player with magic power of $magicPower!");
+      stdout.writeln('$this is attacking $player with magic power of $magicPower!');
     } else {
       player.defend(unarmedPower);
-      stdout.writeln("$this is attacking $player unarmed with power of $unarmedPower!");
+      stdout.writeln('$this is attacking $player unarmed with power of $unarmedPower!');
     }
   }
 
@@ -39,7 +39,7 @@ class Magician extends Participant {
 
     // 10 to 20 decrease of mana, 40 % chance to not defense with magic shield
     if ((_mana -= (new Random().nextInt(10 + 1) + 10)) > 0 && (new Random().nextInt(10 + 1) > 4)) {
-      stdout.writeln("... Attack blocked with powerfull magic shield.");
+      stdout.writeln('... Attack blocked with powerfull magic shield.');
       return;
     }
 
@@ -50,6 +50,8 @@ class Magician extends Participant {
   @override
   void rest () {
     // 2 to 7
+    print('resting $_mana');
     _mana += new Random().nextInt(5 + 1) + 2;
+    print(_mana);
   }
 }

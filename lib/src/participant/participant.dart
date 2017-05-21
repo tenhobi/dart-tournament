@@ -57,7 +57,7 @@ abstract class Participant {
   void attack (final Participant player) {
     int power = damage + ((new Random().nextInt(15) == 0) ? damage ~/ 2 : 0);
 
-    stdout.writeln("$this is attacking $player with power of $power!");
+    stdout.writeln('$this is attacking $player with power of $power!');
 
     player.defend(power);
   }
@@ -66,7 +66,7 @@ abstract class Participant {
   void defend (final int damage) {
     // Chance to block attack 1/30.
     if (new Random().nextInt(30) == 0) {
-      stdout.writeln("... Attack blocked.");
+      stdout.writeln('... Attack blocked.');
       return;
     }
 
