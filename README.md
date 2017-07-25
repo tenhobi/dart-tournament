@@ -58,7 +58,7 @@ Samwell Flowers (Warriror #2) [93/183] is attacking Vome the Magician (Magician 
 
 Vome the Magician (Magician #1) [85/109] is attacking Samwell Flowers (Warriror #2) [93/183] with power of 42!
 Samwell Flowers (Warriror #2) [51/183] is attacking Vome the Magician (Magician #1) [85/109] with power of 6!
-[](LICENSE)
+
   --- Round 7
   --- with 2 players
 
@@ -90,7 +90,7 @@ Peasant #0 - 'Issac Woodman' - hp: -9/53, damage: 3
 
 ## Contributing
 
-Spotted an error? Something doesn't make sense? [Open an issue](../../issues/new) or submit PRs.
+Spotted an error? Something doesn't make sense? You have an excellent idea? [Open an issue](https://github.com/HoBi/dart-tournament/issues/new) or submit PRs.
 
 ## License
 
