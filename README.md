@@ -1,6 +1,6 @@
 # Dart Tournament
 
-[![Build Status](https://travis-ci.org/HoBi/dart-tournament.svg?branch=master)](https://travis-ci.org/HoBi/dart-tournament)
+[![Build Status](https://travis-ci.org/tenhobi/dart-tournament.svg?branch=master)](https://travis-ci.org/tenhobi/dart-tournament)
 
 An experimental console game using Dart focusing autonomous processing of randomly generated simple game data. Also, this game can be used to demonstrate the Dart language.
 
