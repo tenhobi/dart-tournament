@@ -4,6 +4,8 @@
 
 An experimental console game using Dart focusing autonomous processing of randomly generated simple game data. Also, this game can be used to demonstrate the Dart language.
 
+This project have been used as a reference solution for [autonomous processing app contest](https://www.itnetwork.cz/programovani/diskuzni-forum-ostatni-programovaci-jazyky/machr-na-oop-hra-v-dart-5896f7b46fbca).
+
 ## How it works
 
 The tournament starts with `x` participiants, in this sample there are 3. Round by round the participiants randomly attacks to other tournament's participiants which defends themselves as the response. The participiants might be of various types, like a magician, warrior etc.
